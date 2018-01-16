@@ -32,10 +32,10 @@ namespace IPCount
         public MainWindow()
         {
             InitializeComponent();
-            ik = new IpControll();
+            Ik = new IpControll();
             for (int i = 0; i < 4; i++)
             {
-                iptb = new TextBox
+                Iptb = new TextBox
                 {
                     
                     
@@ -46,7 +46,7 @@ namespace IPCount
                 {
                     Content = "."
                 };
-                binIP = new Label
+                BinIP = new Label
                 {
                     Content = "00000000",
                     Height = 30,
@@ -54,26 +54,26 @@ namespace IPCount
                     Background = new SolidColorBrush(Colors.LightGray)
                 };
 
-                BinIPs.Add(ik.Lbl);
-                IpOctets.Add(iptb);
-                iptb.TextChanged += Iptb_TextChanged;
-                SpIPInput.Children.Add(iptb);
+                BinIPs1.Add(Ik.Lbl);
+                IpOctets1.Add(Iptb);
+                Iptb.TextChanged += Iptb_TextChanged;
+                SpIPInput.Children.Add(Iptb);
                 if (i == 3) point.Content = "/";
                 SpIPInput.Children.Add(point);
-                LblSpBinIp.Children.Add(binIP);
+                LblSpBinIp.Children.Add(BinIP);
                 
             }
-            cIDR = new TextBox()
+            CIDR = new TextBox()
             {
                 Width = 30,
                 Height = 20
             };
-            SpIPInput.Children.Add(cIDR);
+            SpIPInput.Children.Add(CIDR);
 
             for (int i = 0; i < 4; i++)
             {
               
-                mtb = new TextBox
+                Mtb = new TextBox
                 {
                     Width = 30,
                     Height = 20
@@ -82,7 +82,7 @@ namespace IPCount
                 {
                     Content = "."
                 };
-                SpMaskInput.Children.Add(mtb);
+                SpMaskInput.Children.Add(Mtb);
                 if (i!=3)
                 {
                     SpMaskInput.Children.Add(point);
@@ -94,24 +94,32 @@ namespace IPCount
 
         }
 
+        public TextBox Iptb { get => iptb; set => iptb = value; }
+        public TextBox Mtb { get => mtb; set => mtb = value; }
+        public Label BinIP { get => binIP; set => binIP = value; }
+        public TextBox CIDR { get => cIDR; set => cIDR = value; }
+        public List<TextBox> IpOctets1 { get => IpOctets; set => IpOctets = value; }
+        public List<Label> BinIPs1 { get => BinIPs; set => BinIPs = value; }
+        internal IpControll Ik { get => ik; set => ik = value; }
+
         private void Iptb_TextChanged(object sender, TextChangedEventArgs e)
         {
 
             for (int i = 0; i < 4; i++)
             {
 
-                binIP = new Label
+                BinIP = new Label
                 {
                     Background = new SolidColorBrush(Colors.Coral)
                 };
                 
-                string s = IpOctets[i].Text;
+                string s = IpOctets1[i].Text;
                 
                 if (s!="")
                 {
-                    ik.IpOctet = s;
+                    Ik.IpOctet = s;
                     
-                    binIP.Content = BinIPs[i].Content;
+                    BinIP.Content = BinIPs1[i].Content;
                 }
                 
             }
